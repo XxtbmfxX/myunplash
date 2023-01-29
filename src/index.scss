@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Noto+Sans:wght@500;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+@layer base {
+  .NotoSans {
+    font-family: "Noto Sans", sans-serif;
+  }
+
+  .ImgCard {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: auto;
+    width: 100%;
+  }
+  .Login {
+    @apply grid gap-2;
+    &_error {
+      @apply text-red-400;
+    }
+
+    input {
+      @apply rounded-lg p-2  text-gray-800;
+    }
+  }
+}

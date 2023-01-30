@@ -1,5 +1,9 @@
+import { getAuth, signOut } from "firebase/auth";
 import { useState } from "react";
+import { FirebaseApp } from "../firebase/firebaseApp";
 import { UploadButton } from "./UploadButton";
+
+const auth = getAuth(FirebaseApp);
 
 export const Burger = () => {
   const [state, setState] = useState(false);
@@ -8,20 +12,15 @@ export const Burger = () => {
     setState(!state);
   };
   return (
-    <div>
+    <div className="text-gray-800">
       <span
-        className="material-symbols-outlined cursor-pointer "
+        className="material-symbols-outlined cursor-pointer text-gray-50  "
         onClick={toggleMenu}>
         Menu
       </span>
-      <div
-        className={
-          state
-            ? "  flex items-center flex-col absolute right-10 top-16 bg-gray-200 rounded-lg p-3  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-green-300 duration-300   "
-            : `hidden`
-        }>
-        <div className="flex mb-2 ">
-          <span className="material-symbols-outlined bg-slate-100 rounded-full p-2 mr-2 cursor-pointer hover:border-gray-700 hover:border-2 ">
+      <div className={state ? "Navigation" : `hidden`}>
+        <section className=" Search_input flex mb-2 ">
+          <span className="material-symbols-outlined bg-slate-100 rounded-full p-2 mr-2 cursor-pointer  ">
             search
           </span>
           <input
@@ -29,9 +28,16 @@ export const Burger = () => {
             placeholder="Search by name"
             type="text"
           />
-        </div>
+        </section>
 
         <UploadButton />
+        <button
+          className="my-4 hover:underline text-red-400 "
+          onClick={() => {
+            signOut(auth);
+          }}>
+          Cerrar Sesion
+        </button>
       </div>
     </div>
   );

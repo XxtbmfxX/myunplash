@@ -1,40 +1,41 @@
+import { Auth, getAuth } from "firebase/auth";
 import React, { createContext, useState } from "react";
+import { object, string } from "yup";
+import { FirebaseApp } from "../firebase/firebaseApp";
+
+const auth = getAuth(FirebaseApp);
 
 interface AppContextProps {
   overlay: boolean;
-  setoverlay: Function;
-  usuarioGlobal: {};
-  setusuarioGlobal: Function;
+  setoverlay: React.SetStateAction<{}>;
+  GlobalUser: null;
+  setGlobalUser: React.SetStateAction<{}>;
+
+  auth: object;
+  setauth: React.SetStateAction<{}>;
 }
 
 const AppContext = createContext<AppContextProps>({
   overlay: false,
-  setoverlay: Function,
-  usuarioGlobal: {},
-  setusuarioGlobal: Function,
+  setoverlay: () => {},
+  GlobalUser: null,
+  setGlobalUser: () => {},
+
+  auth: {},
+  setauth: () => {},
 });
 
 const MyProvider: React.FC<{ children: React.ReactNode }> = (props) => {
   const [overlay, setoverlay] = useState(false);
-  const [usuarioGlobal, setusuarioGlobal] = useState({});
+  const [GlobalUser, setGlobalUser] = useState(null);
+  const [auth, setauth] = useState<object>({});
 
   return (
     <AppContext.Provider
-      value={{ overlay, setoverlay, usuarioGlobal, setusuarioGlobal }}>
+      value={{ overlay, setoverlay, GlobalUser, setGlobalUser, auth, setauth }}>
       {props.children}
     </AppContext.Provider>
   );
 };
 
 export { AppContext, MyProvider };
-
-//   const fileInputRef = useRef(null);
-//   const [file, setFile] = useState(null);
-
-//   const handleButtonClick = () => {
-//     fileInputRef.current.click();
-//   };
-
-//   const handleFileChange = (event: any): void => {
-//     setFile(event.target.files[0]);
-//   };

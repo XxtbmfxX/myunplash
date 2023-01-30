@@ -1,11 +1,10 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.scss";
 
 import { Header } from "./components/Header";
-import { Gallery } from "./components/Gallery";
 import { AppContext, MyProvider } from "./context/AppContext";
 import { FirebaseApp } from "./firebase/firebaseApp";
 import { LoginPage } from "./pages/LoginPage";
@@ -15,33 +14,44 @@ import { Main } from "./pages/Main";
 const auth = getAuth(FirebaseApp);
 
 function App() {
-  // const { usuarioGlobal, setusuarioGlobal } = useContext(AppContext);
+  const { GlobalUser, setGlobalUser, setauth } = useContext(AppContext);
 
-  const [usuarioGlobal, setusuarioGlobal] = useState(null);
+  // setauth(auth);
+
+  const [usuarioGlobal, setusuarioGlobal] = useState<any>(null);
 
   onAuthStateChanged(auth, (FireUser: any) => {
     if (FireUser) {
-      //session on the shoe this
+      //session on then show this
 
       setusuarioGlobal(FireUser);
+      // usuarioGlobal(FireUser);
     } else {
       setusuarioGlobal(null);
+      // setGlobalUser(null);
     }
   });
 
+  useEffect(() => {
+    console.log("rendering");
+  }, []);
+
   return (
-    <div
-      className="App  flex flex-col items-center
+    <MyProvider>
+      <div
+        className="App  flex flex-col items-center
       w-full min-h-screen bg-slate-900 text-yellow-50  ">
-      <Header />
-      {usuarioGlobal ? <Main /> : <LoginPage />}
-      {/* <MyProvider>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </MyProvider> */}
-    </div>
+        <Header email={usuarioGlobal?.email} />
+        {usuarioGlobal ? (
+          <Routes>
+            <Route path="/" element={<Main email={usuarioGlobal?.email} />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        ) : (
+          <LoginPage />
+        )}
+      </div>
+    </MyProvider>
   );
 }
 

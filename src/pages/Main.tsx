@@ -1,19 +1,65 @@
-import { getAuth, signOut } from "firebase/auth";
+import { Gallery } from "../components/Gallery";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import { FirebaseApp } from "../firebase/firebaseApp";
+import { AppContext } from "../context/AppContext";
+import { useContext, useEffect, useState } from "react";
 
 const auth = getAuth(FirebaseApp);
+const firestore = getFirestore(FirebaseApp);
 
-export const Main = () => {
+type MainProps = {
+  email: string;
+};
+
+export const Main = ({ email }: MainProps) => {
+  const [arrayImages, setArrayImages] = useState(null);
+  const fakeData = [
+    { id: 1, descripcion: "tarea falsa 1", image: "https://picsum.photos/420" },
+    { id: 2, descripcion: "tarea falsa 2", image: "https://picsum.photos/320" },
+    { id: 3, descripcion: "tarea falsa 3", image: "https://picsum.photos/520" },
+  ];
+
+  async function buscarDocumentOrCrearDocumento(idDocumento) {
+    //crear referencia al documento
+    const docuRef = doc(firestore, `usuarios/${idDocumento}`);
+    // buscar documento
+    const consulta = await getDoc(docuRef);
+    // revisar si existe
+    if (consulta.exists()) {
+      // si sí existe
+      const infoDocu = consulta.data();
+      return infoDocu.images;
+    } else {
+      // si no existe
+      await setDoc(docuRef, { images: [...fakeData] });
+      const consulta = await getDoc(docuRef);
+      const infoDocu = consulta.data();
+      return infoDocu.images;
+    }
+  }
+
+  useEffect(() => {
+    async function fetchimages() {
+      const imagesFetchadas = await buscarDocumentOrCrearDocumento(email);
+      setArrayImages(imagesFetchadas);
+    }
+
+    fetchimages();
+  }, []);
+
   return (
-    <div className="Main">
-      <h1>Main Compoent session start</h1>
-      <button
-        onClick={() => {
-          signOut(auth);
-          console.log("cerrado");
-        }}>
-        Cerrar Sesion
-      </button>
-    </div>
+    <main className="Main flex items-center justify-center">
+      {arrayImages ? (
+        <Gallery imageList={arrayImages} />
+      ) : (
+        <h1 className="flex align-middle justify-center">
+          Agrega Las imagenes que tu quieras {"ヾ(•ω•`)o"}
+          <span className=" ml-4 animate-spin material-symbols-outlined">
+            cycle
+          </span>
+        </h1>
+      )}
+    </main>
   );
 };

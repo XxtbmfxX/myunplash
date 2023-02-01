@@ -14,8 +14,6 @@ import { Main } from "./pages/Main";
 const auth = getAuth(FirebaseApp);
 
 function App() {
-  const { GlobalUser, setGlobalUser, setauth } = useContext(AppContext);
-
   // setauth(auth);
 
   const [usuarioGlobal, setusuarioGlobal] = useState<any>(null);

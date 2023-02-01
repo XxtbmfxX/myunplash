@@ -1,7 +1,6 @@
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { FirebaseApp } from "../firebase/firebaseApp";
-import { DelleteImage } from "./DelleteImage";
 
 type ImageObject = {
   id: number;
@@ -29,7 +28,7 @@ export const ImgCard = ({
   const handleDelete = (imageId: number) => {
     //New Array
     const newArrayImages = arrayImages.filter(
-      (image: object) => image.id !== imageId
+      (image: any) => image.id !== imageId
     );
 
     //Update DB

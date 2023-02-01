@@ -1,3 +1,7 @@
 export const NotFound = () => {
-  return <div>NotFound</div>;
+  return (
+    <div>
+      <h1>Lo siento amigo no tenemos endpoints acá</h1>
+    </div>
+  );
 };

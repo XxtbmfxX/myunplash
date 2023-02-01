@@ -22,7 +22,7 @@ export const Main = ({ email }: MainProps) => {
     { id: 3, descripcion: "tarea falsa 3", image: "https://picsum.photos/520" },
   ];
 
-  async function buscarDocumentOrCrearDocumento(idDocumento) {
+  async function buscarDocumentOrCrearDocumento(idDocumento: string) {
     //crear referencia al documento
     const docuRef = doc(firestore, `usuarios/${idDocumento}`);
     // buscar documento
@@ -37,7 +37,7 @@ export const Main = ({ email }: MainProps) => {
       await setDoc(docuRef, { images: [...fakeData] });
       const consulta = await getDoc(docuRef);
       const infoDocu = consulta.data();
-      return infoDocu.images;
+      return infoDocu!.images;
     }
   }
 
@@ -53,7 +53,7 @@ export const Main = ({ email }: MainProps) => {
   return (
     <main className="Main flex items-center justify-center">
       <AddFileCard
-        arrayImages={arrayImages}
+        arrayImages={arrayImages!}
         setArrayImages={setArrayImages}
         email={email}
       />

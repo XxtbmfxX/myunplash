@@ -1,12 +1,13 @@
 import { getAuth, signOut } from "firebase/auth";
 import { useContext, useState } from "react";
+import { AppContextType } from "../@types/app";
 import { AppContext } from "../context/AppContext";
 import { FirebaseApp } from "../firebase/firebaseApp";
 
 const auth = getAuth(FirebaseApp);
 
 export const Burger = () => {
-  const { setfileCard, fileCard } = useContext(AppContext);
+  const { setfileCard, fileCard } = useContext(AppContext) as AppContextType;
 
   const [state, setState] = useState(false);
 

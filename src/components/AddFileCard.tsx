@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { FirebaseApp } from "../firebase/firebaseApp";
+import { AppContextType } from "../@types/app";
 
 type FormValus = {
   description: string;
@@ -24,7 +25,7 @@ export const AddFileCard = ({
   setArrayImages,
   email,
 }: AddFileCardProps) => {
-  const { fileCard } = useContext(AppContext);
+  const { fileCard } = useContext(AppContext) as AppContextType;
 
   const [file, setfile] = useState<any>({});
 

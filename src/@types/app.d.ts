@@ -10,12 +10,9 @@ export type AppContextType = {
   overlay: boolean;
   setoverlay: React.SetStateAction<{}>;
 
-  fileCard: boolean;
-  setfileCard: React.SetStateAction<{}>;
-
   GlobalUser: null;
   setGlobalUser: React.SetStateAction<{}>;
 
-  auth: object;
-  setauth: React.SetStateAction<{}>;
+  fileCard: boolean;
+  setfileCard: (value: boolean) => void;
 };

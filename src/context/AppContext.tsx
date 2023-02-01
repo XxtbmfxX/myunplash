@@ -1,19 +1,18 @@
 import { Auth, getAuth } from "firebase/auth";
 import React, { createContext, useState } from "react";
 import { object, string } from "yup";
+import { AppContextType } from "../@types/app";
 import { FirebaseApp } from "../firebase/firebaseApp";
 
-const auth = getAuth(FirebaseApp);
-
-interface AppContextProps {}
-
-const AppContext = createContext<AppContextProps>({});
+const AppContext = React.createContext<AppContextType | null>(null);
 
 const MyProvider: React.FC<{ children: React.ReactNode }> = (props) => {
-  const [overlay, setoverlay] = useState(false);
-  const [fileCard, setfileCard] = useState(false);
+  const [overlay, setoverlay] = useState<boolean>(false);
+
+  const [fileCard, setfileCard] = useState<boolean>(false);
+
   const [GlobalUser, setGlobalUser] = useState(null);
-  const [auth, setauth] = useState<object>({});
+
   const [arrayImages, setArrayImages] = useState(null);
 
   return (
@@ -21,10 +20,10 @@ const MyProvider: React.FC<{ children: React.ReactNode }> = (props) => {
       value={{
         overlay,
         setoverlay,
+
         GlobalUser,
         setGlobalUser,
-        auth,
-        setauth,
+
         fileCard,
         setfileCard,
       }}>

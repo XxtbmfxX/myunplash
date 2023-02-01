@@ -7,6 +7,9 @@ import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { FirebaseApp } from "../firebase/firebaseApp";
 
+type FormValus = {
+  description: string;
+};
 type AddFileCardProps = {
   arrayImages: string;
   setArrayImages: Function;
@@ -23,7 +26,7 @@ export const AddFileCard = ({
 }: AddFileCardProps) => {
   const { fileCard } = useContext(AppContext);
 
-  const [file, setfile] = useState(null);
+  const [file, setfile] = useState<any>({});
 
   let downloadUrl: string;
 
@@ -32,7 +35,7 @@ export const AddFileCard = ({
   const fileHandler = async () => {
     //detectar file
 
-    const localFile = file;
+    const localFile: Blob = file!;
 
     // //load it to storage
     const fileRef = ref(storage, `documents/${localFile.name}`);
@@ -44,7 +47,7 @@ export const AddFileCard = ({
 
   //-------------HandleAdd--------------------------
 
-  const handleAdd = async (values: object) => {
+  const handleAdd = async (values: FormValus) => {
     await fileHandler();
     if (file !== null) {
       const description = values.description;
@@ -97,8 +100,9 @@ export const AddFileCard = ({
         <input
           id="file"
           type="file"
-          onChange={(e) => {
-            setfile(e.target.files[0]);
+          onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+            const fileItem = e.target.files![0];
+            setfile(fileItem);
           }}
         />
 

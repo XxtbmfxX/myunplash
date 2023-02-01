@@ -5,32 +5,9 @@ import { FirebaseApp } from "../firebase/firebaseApp";
 
 const auth = getAuth(FirebaseApp);
 
-interface AppContextProps {
-  overlay: boolean;
-  setoverlay: React.SetStateAction<{}>;
+interface AppContextProps {}
 
-  fileCard: boolean;
-  setfileCard: React.SetStateAction<{}>;
-
-  GlobalUser: null;
-  setGlobalUser: React.SetStateAction<{}>;
-
-  auth: object;
-  setauth: React.SetStateAction<{}>;
-}
-
-const AppContext = createContext<AppContextProps>({
-  overlay: false,
-  setoverlay: () => {},
-
-  GlobalUser: null,
-  setGlobalUser: () => {},
-  auth: {},
-  setauth: () => {},
-
-  fileCard: false,
-  setfileCard: () => {},
-});
+const AppContext = createContext<AppContextProps>({});
 
 const MyProvider: React.FC<{ children: React.ReactNode }> = (props) => {
   const [overlay, setoverlay] = useState(false);

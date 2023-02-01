@@ -2,7 +2,7 @@ import { Auth, getAuth } from "firebase/auth";
 import React, { createContext, useState } from "react";
 import { object, string } from "yup";
 import { AppContextType } from "../@types/app";
-import { FirebaseApp } from "../firebase/firebaseApp";
+import { FirebaseApp } from "../firebase/firebase.config";
 
 const AppContext = React.createContext<AppContextType | null>(null);
 

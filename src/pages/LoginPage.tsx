@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 
-import { FirebaseApp } from "../firebase/firebaseApp.js";
+import { FirebaseApp } from "../firebase/firebase.config.js";
 import {
   getAuth,
   createUserWithEmailAndPassword,

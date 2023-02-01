@@ -1,6 +1,6 @@
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
-import { FirebaseApp } from "../firebase/firebaseApp";
+import { FirebaseApp } from "../firebase/firebase.config";
 
 type ImageObject = {
   id: number;

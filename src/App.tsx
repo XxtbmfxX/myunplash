@@ -6,7 +6,7 @@ import "./App.scss";
 
 import { Header } from "./components/Header";
 import { AppContext, MyProvider } from "./context/AppContext";
-import { FirebaseApp } from "./firebase/firebaseApp";
+import { FirebaseApp } from "./firebase/firebase.config";
 import { LoginPage } from "./pages/LoginPage";
 import { NotFound } from "./pages/NotFound";
 import { Main } from "./pages/Main";

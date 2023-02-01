@@ -1,5 +1,5 @@
 import { AppContext } from "../context/AppContext";
-import { FirebaseApp } from "../firebase/firebaseApp";
+import { FirebaseApp } from "../firebase/firebase.config";
 import { Account } from "./Account";
 import { Burger } from "./Burger";
 

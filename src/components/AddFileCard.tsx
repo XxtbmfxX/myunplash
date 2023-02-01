@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { FirebaseApp } from "../firebase/firebaseApp";
+import { FirebaseApp } from "../firebase/firebase.config";
 import { AppContextType } from "../@types/app";
 
 type FormValus = {

@@ -6,8 +6,11 @@ import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+const apikey = "AIzaSyDjJUf4bMo-l8nCPlTZHdXKoD72VzX0SwE";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDjJUf4bMo-l8nCPlTZHdXKoD72VzX0SwE",
+  apiKey: apikey,
   authDomain: "unplasgallery.firebaseapp.com",
   databaseURL: "https://unplasgallery-default-rtdb.firebaseio.com",
   projectId: "unplasgallery",

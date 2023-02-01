@@ -2,7 +2,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { useContext, useState } from "react";
 import { AppContextType } from "../@types/app";
 import { AppContext } from "../context/AppContext";
-import { FirebaseApp } from "../firebase/firebaseApp";
+import { FirebaseApp } from "../firebase/firebase.config";
 
 const auth = getAuth(FirebaseApp);
 

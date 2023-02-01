@@ -1,7 +1,7 @@
 import { Gallery } from "../components/Gallery";
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { FirebaseApp } from "../firebase/firebaseApp";
+import { FirebaseApp } from "../firebase/firebase.config";
 import { AppContext } from "../context/AppContext";
 import { useContext, useEffect, useState } from "react";
 import { AddFileCard } from "../components/AddFileCard";

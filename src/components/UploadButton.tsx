@@ -10,11 +10,6 @@ export const UploadButton = () => {
 
   return (
     <>
-      <button
-        className="p-2 rounded-lg bg-green-300 border-2 border-green-500 hover:text-white  "
-        onClick={handleButtonClick}>
-        Add a photo
-      </button>
       {/* <input
         type="file"
         ref={fileInputRef}

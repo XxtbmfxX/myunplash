@@ -32,12 +32,22 @@ body {
   .Navigation {
     @apply flex items-center flex-col absolute right-10 top-16 bg-gray-200 rounded-lg p-3 z-10;
   }
-
   .Description {
     @apply hidden absolute top-0 w-full h-full rounded-lg  align-middle justify-center bg-gray-500 opacity-50;
 
     &_text {
       @apply absolute bottom-2 left-2 opacity-100 max-h-20 w-full font-bold;
+    }
+  }
+
+  .FileCard {
+    @apply absolute bg-blend-darken bg-amber-200 top-80 w-3/4 h-52 text-gray-800 rounded-lg items-center;
+
+    &_form {
+      @apply flex flex-col align-middle items-center w-full;
+      input {
+        @apply rounded-lg p-2 border-2 border-gray-400 focus:outline-blue-400;
+      }
     }
   }
 

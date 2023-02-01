@@ -4,6 +4,7 @@ import { getAuth } from "firebase/auth";
 import { FirebaseApp } from "../firebase/firebaseApp";
 import { AppContext } from "../context/AppContext";
 import { useContext, useEffect, useState } from "react";
+import { AddFileCard } from "../components/AddFileCard";
 
 const auth = getAuth(FirebaseApp);
 const firestore = getFirestore(FirebaseApp);
@@ -14,6 +15,7 @@ type MainProps = {
 
 export const Main = ({ email }: MainProps) => {
   const [arrayImages, setArrayImages] = useState(null);
+
   const fakeData = [
     { id: 1, descripcion: "tarea falsa 1", image: "https://picsum.photos/420" },
     { id: 2, descripcion: "tarea falsa 2", image: "https://picsum.photos/320" },
@@ -50,8 +52,17 @@ export const Main = ({ email }: MainProps) => {
 
   return (
     <main className="Main flex items-center justify-center">
+      <AddFileCard
+        arrayImages={arrayImages}
+        setArrayImages={setArrayImages}
+        email={email}
+      />
       {arrayImages ? (
-        <Gallery imageList={arrayImages} />
+        <Gallery
+          arrayImages={arrayImages}
+          setArrayImages={setArrayImages}
+          email={email}
+        />
       ) : (
         <h1 className="flex align-middle justify-center">
           Agrega Las imagenes que tu quieras {"ヾ(•ω•`)o"}

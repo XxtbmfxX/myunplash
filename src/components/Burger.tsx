@@ -1,16 +1,24 @@
 import { getAuth, signOut } from "firebase/auth";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../context/AppContext";
 import { FirebaseApp } from "../firebase/firebaseApp";
-import { UploadButton } from "./UploadButton";
 
 const auth = getAuth(FirebaseApp);
 
 export const Burger = () => {
+  const { setfileCard, fileCard } = useContext(AppContext);
+
   const [state, setState] = useState(false);
 
   const toggleMenu = () => {
     setState(!state);
+    setfileCard(false);
   };
+
+  const handleAdd = () => {
+    setfileCard(!fileCard);
+  };
+
   return (
     <div className="text-gray-800">
       <span
@@ -29,12 +37,18 @@ export const Burger = () => {
             type="text"
           />
         </section>
+        {/* UPLOAD BUTON */}
 
-        <UploadButton />
+        <button
+          className="p-2 rounded-lg bg-green-300 border-2 border-green-500 hover:text-white  "
+          onClick={handleAdd}>
+          Add a photo
+        </button>
         <button
           className="my-4 hover:underline text-red-400 "
           onClick={() => {
             signOut(auth);
+            setfileCard(false);
           }}>
           Cerrar Sesion
         </button>

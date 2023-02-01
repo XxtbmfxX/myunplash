@@ -1,4 +1,6 @@
+import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
+import { FirebaseApp } from "../firebase/firebaseApp";
 import { DelleteImage } from "./DelleteImage";
 
 type ImageObject = {
@@ -7,14 +9,35 @@ type ImageObject = {
   descripcion: string;
 };
 
-type ImgCard = {
+type ImgCardProps = {
   image: ImageObject;
-  // imageRef: React.MutableRefObject<null>;
-  // height:string;
+  setArrayImages: Function;
+  email: string;
+  arrayImages: Array<Object>;
 };
 
-export const ImgCard = ({ image }: ImgCard) => {
+const firestore = getFirestore(FirebaseApp);
+
+export const ImgCard = ({
+  image,
+  setArrayImages,
+  email,
+  arrayImages,
+}: ImgCardProps) => {
   const [description, setdescription] = useState(false);
+
+  const handleDelete = (imageId: number) => {
+    //New Array
+    const newArrayImages = arrayImages.filter(
+      (image: object) => image.id !== imageId
+    );
+
+    //Update DB
+    const docRef = doc(firestore, `usuarios/${email}`);
+    updateDoc(docRef, { images: [...newArrayImages] });
+    //Update state
+    setArrayImages(newArrayImages);
+  };
 
   return (
     <div
@@ -22,7 +45,7 @@ export const ImgCard = ({ image }: ImgCard) => {
       onMouseLeave={() => {
         setdescription(false);
       }}
-      className="ImgCard relative">
+      className={`ImgCard relative ${description && "shadow-2xl"} `}>
       <img
         src={image.image}
         className="w-full h-full object-cover rounded-lg"
@@ -36,7 +59,12 @@ export const ImgCard = ({ image }: ImgCard) => {
         className={`Description_text h-full w-full flex-col justify-end  ${
           description === true ? "flex  " : "hidden"
         } `}>
-        <DelleteImage imageId={image.id} />
+        {/* //Dellete button */}
+        <button
+          onClick={() => handleDelete(image.id)}
+          className=" self-end mr-4 absolute bottom-24  bg-red-400 rounded-lg w-16 text-xs hover:text-gray-200">
+          Borrar
+        </button>
         <span className="w-2/3 h-10  ">{image.descripcion} </span>
       </div>
     </div>

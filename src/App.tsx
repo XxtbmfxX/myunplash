@@ -32,10 +32,6 @@ function App() {
     }
   });
 
-  useEffect(() => {
-    console.log("rendering");
-  }, []);
-
   return (
     <MyProvider>
       <div

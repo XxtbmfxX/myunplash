@@ -30,21 +30,26 @@ body {
   }
 
   .Navigation {
-    @apply flex items-center flex-col absolute right-10 top-16 bg-gray-200 rounded-lg p-3 z-10;
+    @apply flex items-center flex-col absolute right-10 left-10 top-28 backdrop-blur-xl bg-white/30 rounded-lg p-5 z-10 max-w-sm;
+    margin: 0px auto;
   }
   .Description {
-    @apply hidden absolute top-0 w-full h-full rounded-lg  align-middle justify-center bg-gray-500 opacity-50;
+    @apply hidden absolute top-0 w-full h-full rounded-lg justify-between bg-gray-500 opacity-50;
 
     &_text {
-      @apply absolute bottom-2 left-2 opacity-100 max-h-20 w-full font-bold;
+      @apply absolute bottom-2 left-0 opacity-100 w-full h-full font-bold flex flex-col justify-between;
+      span {
+        margin-left: 5px;
+        overflow: hidden;
+      }
     }
   }
 
   .FileCard {
-    @apply absolute bg-blend-darken bg-amber-200 top-80 w-3/4 h-52 text-gray-800 rounded-lg items-center;
+    @apply absolute bg-blend-darken p-5 top-96 w-3/4 h-60 text-gray-50 rounded-lg  backdrop-blur-xl bg-white/30;
 
     &_form {
-      @apply flex flex-col align-middle items-center w-full;
+      @apply flex flex-col align-middle items-center justify-between  w-full;
       input {
         @apply rounded-lg p-2 border-2 border-gray-400 focus:outline-blue-400;
       }

@@ -51,20 +51,22 @@ export const ImgCard = ({
         alt="your-image"
       />
       <div
-        className={`Description  ${description === true ? "flex" : "hidden"} `}>
+        className={`Description flex ${
+          description === true ? "flex" : "hidden"
+        } `}>
         {" "}
       </div>
       <div
-        className={`Description_text h-full w-full flex-col justify-end  ${
+        className={`Description_text ${
           description === true ? "flex  " : "hidden"
         } `}>
         {/* //Dellete button */}
         <button
           onClick={() => handleDelete(image.id)}
-          className=" self-end mr-4 absolute bottom-24  bg-red-400 rounded-lg w-16 text-xs hover:text-gray-200">
+          className=" self-end  bg-red-400 mt-4 rounded-lg w-16 text-xs hover:text-gray-200 mr-2">
           Borrar
         </button>
-        <span className="w-2/3 h-10  ">{image.descripcion} </span>
+        <span className="w-3/4 truncate ">{image.descripcion} </span>
       </div>
     </div>
   );

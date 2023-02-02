@@ -34,7 +34,7 @@ function App() {
     <MyProvider>
       <div
         className="App  flex flex-col items-center
-      w-full min-h-screen bg-slate-900 text-yellow-50  ">
+      w-full min-h-screen bg-slate-900 text-gray-800  ">
         <Header email={usuarioGlobal?.email} />
         {usuarioGlobal ? (
           <Routes>

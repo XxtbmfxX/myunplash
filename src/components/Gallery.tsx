@@ -12,7 +12,9 @@ type Gallery = {
 
 export const Gallery = ({ arrayImages, setArrayImages, email }: Gallery) => {
   return (
-    <div id="outer-container" className="Gallery grid grid-cols-3 gap-4 w-5/6 ">
+    <div
+      id="outer-container"
+      className="Gallery grid grid-cols-1 sm:grid-cols-3  gap-4 w-5/6 ">
       {arrayImages &&
         arrayImages.map((image: any) => (
           <ImgCard

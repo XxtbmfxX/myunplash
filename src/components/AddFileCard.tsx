@@ -25,9 +25,9 @@ export const AddFileCard = ({
   setArrayImages,
   email,
 }: AddFileCardProps) => {
-  const { fileCard } = useContext(AppContext) as AppContextType;
+  const { setfileCard, fileCard } = useContext(AppContext) as AppContextType;
 
-  const [file, setfile] = useState<any>({});
+  const [file, setfile] = useState<any>(null);
 
   let downloadUrl: string;
 
@@ -88,10 +88,11 @@ export const AddFileCard = ({
   return (
     <section className={`FileCard z-20 ${fileCard ? "flex" : "hidden"}  `}>
       <form className="FileCard_form" onSubmit={formik.handleSubmit}>
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">Descripción</label>
         <input
           id="description"
           type="text"
+          className="text-gray-800"
           {...formik.getFieldProps("description")}
         />
         {formik.touched.description && formik.errors.description ? (
@@ -101,14 +102,19 @@ export const AddFileCard = ({
         <input
           id="file"
           type="file"
+          className="w-5/6"
           onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
             const fileItem = e.target.files![0];
+
             setfile(fileItem);
           }}
         />
 
         {/* //Submit button */}
-        <button className="bg-green-300 p-2 rounded-lg " type="submit">
+        <button
+          onClick={() => setfileCard(!fileCard)}
+          className="bg-green-300 p-2 rounded-lg text-gray-800 hover:text-yellow-50 "
+          type="submit">
           Subir Foto
         </button>
       </form>

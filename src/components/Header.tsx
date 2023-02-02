@@ -9,7 +9,10 @@ type HeaderProps = {
 
 export const Header = ({ email }: HeaderProps) => {
   return (
-    <header className="Header flex flex-row  justify-between items-center relative mt-10  mb-20 w-3/4 ">
+    <header
+      className={`Header flex flex-row text-yellow-50 justify-between items-center relative mt-10  mb-20 w-5/6 animate-bounce  ${
+        email && "animate-none"
+      } `}>
       {email ? (
         <>
           <Account email={email} />

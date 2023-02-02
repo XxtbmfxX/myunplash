@@ -1,5 +1,3 @@
-import Face from "../assets/face.jpg";
-
 type AccountProps = {
   email: string;
 };
@@ -7,7 +5,9 @@ type AccountProps = {
 export const Account = ({ email }: AccountProps) => {
   return (
     <div className="Account flex flex-row ">
-      <img src={Face} className=" mr-2 w-10 h-10 object-cover rounded-lg " />
+      <span className="material-symbols-outlined mr-4 flex items-center ">
+        person_4
+      </span>
       <div className="Acc_text flex flex-col ">
         <span className="text-bold">My Unsplash</span>
         <span className="text-bold">{email ? email : ""}</span>

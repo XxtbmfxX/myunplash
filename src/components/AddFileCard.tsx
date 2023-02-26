@@ -7,12 +7,12 @@ import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { FirebaseApp } from "../firebase/firebase.config";
 import { AppContextType } from "../@types/app";
+import { FileUploader } from "react-drag-drop-files";
 
-type FormValus = {
-  description: string;
-};
+const fileTypes = ["JPG", "JPEG", "PNG", "GIF"];
+
 type AddFileCardProps = {
-  arrayImages: string;
+  arrayImages: Object;
   setArrayImages: Function;
   email: string;
 };
@@ -27,7 +27,10 @@ export const AddFileCard = ({
 }: AddFileCardProps) => {
   const { setfileCard, fileCard } = useContext(AppContext) as AppContextType;
 
-  const [file, setfile] = useState<any>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const handleChange = (file: any) => {
+    setFile(file);
+  };
 
   let downloadUrl: string;
 
@@ -43,12 +46,11 @@ export const AddFileCard = ({
     await uploadBytes(fileRef, localFile);
     //url de descarga
     downloadUrl = await getDownloadURL(fileRef);
-    console.log(downloadUrl);
   };
 
   //-------------HandleAdd--------------------------
 
-  const handleAdd = async (values: FormValus) => {
+  const handleAdd = async (values: { description: string }) => {
     await fileHandler();
     if (file !== null) {
       const description = values.description;
@@ -77,8 +79,8 @@ export const AddFileCard = ({
     validationSchema: Yup.object({
       description: Yup.string()
         .required("This field is required")
-        .min(5, "Minimum of 5 max 20 +_+")
-        .max(40, "Maximum of 20 +_+"),
+        .min(5, "Minimum of 5 max 40 +_+")
+        .max(40, "Maximum of 40 +_+"),
     }),
     onSubmit: (values) => {
       handleAdd(values);
@@ -86,38 +88,27 @@ export const AddFileCard = ({
   });
 
   return (
-    <section className={`FileCard z-20 ${fileCard ? "flex" : "hidden"}  `}>
-      <form className="FileCard_form" onSubmit={formik.handleSubmit}>
-        <label htmlFor="description">Descripción</label>
-        <input
-          id="description"
-          type="text"
-          className="text-gray-800"
-          {...formik.getFieldProps("description")}
-        />
-        {formik.touched.description && formik.errors.description ? (
-          <div className="Login_error">{formik.errors.description}</div>
-        ) : null}
-        {/* file input */}
-        <input
-          id="file"
-          type="file"
-          className="w-5/6"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-            const fileItem = e.target.files![0];
+    <form className="FileCard_form" onSubmit={formik.handleSubmit}>
+      <label htmlFor="description">Descripción</label>
+      <input
+        id="description"
+        type="text"
+        className="text-gray-800"
+        {...formik.getFieldProps("description")}
+      />
+      {formik.touched.description && formik.errors.description ? (
+        <div className="Login_error">{formik.errors.description}</div>
+      ) : null}
+      {/* file input */}
+      <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
 
-            setfile(fileItem);
-          }}
-        />
-
-        {/* //Submit button */}
-        <button
-          onClick={() => setfileCard(!fileCard)}
-          className="bg-green-300 p-2 rounded-lg text-gray-800 hover:text-yellow-50 "
-          type="submit">
-          Subir Foto
-        </button>
-      </form>
-    </section>
+      {/* //Submit button */}
+      <button
+        onClick={() => setfileCard(!fileCard)}
+        className="bg-green-300 p-2 rounded-lg text-gray-800 hover:text-yellow-50 "
+        type="submit">
+        Subir Foto
+      </button>
+    </form>
   );
 };

@@ -1,27 +1,57 @@
+import { getAuth, signOut } from "firebase/auth";
+import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { AppContext } from "../context/AppContext";
 import { FirebaseApp } from "../firebase/firebase.config";
 import { Account } from "./Account";
 import { Burger } from "./Burger";
+import ImageModal from "./ImageModal";
 
-type HeaderProps = {
+type Header = {
+  arrayImages: Array<object | null>;
+  setArrayImages: Function;
   email: string;
 };
 
-export const Header = ({ email }: HeaderProps) => {
+const auth = getAuth(FirebaseApp);
+
+export const Header = ({ arrayImages, setArrayImages, email }: Header) => {
   return (
-    <header
-      className={`Header flex flex-row text-yellow-50 justify-between items-center relative mt-10  mb-20 w-5/6 animate-bounce  ${
-        email && "animate-none"
-      } `}>
+    <header className="w-full mb-12 bg-gray-900 ">
       {email ? (
-        <>
-          <Account email={email} />
-          <Burger />
-        </>
+        <Navbar fluid={true} rounded={true}>
+          <Navbar.Brand>
+            <Dropdown
+              arrowIcon={false}
+              inline={true}
+              label={
+                <Avatar
+                  alt="User settings"
+                  img={
+                    "https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                  }
+                  rounded={true}
+                />
+              }>
+              <Dropdown.Header>
+                <span className="block truncate text-sm font-medium">
+                  {email}
+                </span>
+              </Dropdown.Header>
+              <Dropdown.Item
+                onClick={() => signOut(auth)}
+                className="text-red-600">
+                Sign out
+              </Dropdown.Item>
+            </Dropdown>
+          </Navbar.Brand>
+          <ImageModal
+            arrayImages={arrayImages}
+            setArrayImages={setArrayImages}
+            email={email}
+          />
+        </Navbar>
       ) : (
-        <h1 className="w-full my-8 text-center ">
-          Login To start {"o((>ω< ))o"}
-        </h1>
+        <h1>Login to start</h1>
       )}
     </header>
   );

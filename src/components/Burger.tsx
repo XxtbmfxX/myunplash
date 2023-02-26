@@ -1,4 +1,5 @@
 import { getAuth, signOut } from "firebase/auth";
+import { Button, Modal, Navbar, Dropdown } from "flowbite-react";
 import { useContext, useState } from "react";
 import { AppContextType } from "../@types/app";
 import { AppContext } from "../context/AppContext";
@@ -26,11 +27,6 @@ export const Burger = () => {
 
   return (
     <div className="text-gray-800">
-      <span
-        className="material-symbols-outlined cursor-pointer text-gray-50  "
-        onClick={toggleMenu}>
-        Menu
-      </span>
       <div className={state ? "Navigation" : `hidden`}>
         <section className=" Search_input flex mb-2 ">
           <span className="material-symbols-outlined w-11 h-11 border-2 border-gray-800 rounded-full p-2 mr-2 cursor-pointer  ">
@@ -46,7 +42,7 @@ export const Burger = () => {
         {/* UPLOAD BUTON */}
 
         <button
-          className="p-2 rounded-lg bg-green-300 border-2 border-green-500 hover:text-white  "
+          className="p-2 rounded-lg bg-green-300 border-2  hover:text-white  "
           onClick={handleAdd}>
           Agregar Foto
         </button>

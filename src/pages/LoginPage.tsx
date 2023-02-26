@@ -1,23 +1,39 @@
 import * as React from "react";
 
 import { FirebaseApp } from "../firebase/firebase.config.js";
-import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import {
+  getAuth,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+} from "firebase/auth";
+import { LoginForm } from "../components/LoginFrom.js";
+import { Button } from "flowbite-react";
 
 const auth = getAuth(FirebaseApp);
 const googleProvider = new GoogleAuthProvider();
+const githuProvider = new GithubAuthProvider();
 
 export const LoginPage: React.FC<{}> = () => {
   return (
-    <section className="LoginForm mt-52 h-52 justify-between ">
-      <div className="Loging_forms my-6 grid gap-4 ">
-        <button
-          className={`bg-blue-300 p-2 rounded-lg animate-pulse hover:animate-none `}
+    <section className="LoginForm   justify-between ">
+      <div className="Loging_forms bg-slate-100 border-2 p-8 rounded-lg text-gray-900 my-6 grid gap-4 ">
+        <LoginForm />
+        <Button
           type="submit"
           onClick={() => {
-            signInWithRedirect(auth, googleProvider);
+            signInWithPopup(auth, googleProvider);
           }}>
           Acceder con Google
-        </button>
+        </Button>
+        <Button
+          onClick={() => {
+            signInWithPopup(auth, githuProvider);
+          }}
+          color="dark">
+          Acceder con Github{" "}
+        </Button>
       </div>
     </section>
   );

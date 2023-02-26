@@ -5,6 +5,7 @@ import { FirebaseApp } from "../firebase/firebase.config";
 import { AppContext } from "../context/AppContext";
 import { useContext, useEffect, useState } from "react";
 import { AddFileCard } from "../components/AddFileCard";
+import { Header } from "../components/Header";
 
 const auth = getAuth(FirebaseApp);
 const firestore = getFirestore(FirebaseApp);
@@ -17,9 +18,21 @@ export const Main = ({ email }: MainProps) => {
   const [arrayImages, setArrayImages] = useState(null);
 
   const fakeData = [
-    { id: 1, descripcion: "tarea falsa 1", image: "https://picsum.photos/420" },
-    { id: 2, descripcion: "tarea falsa 2", image: "https://picsum.photos/320" },
-    { id: 3, descripcion: "tarea falsa 3", image: "https://picsum.photos/520" },
+    {
+      id: 1,
+      descripcion: "A good description",
+      image: "https://picsum.photos/420",
+    },
+    {
+      id: 2,
+      descripcion: "A good description",
+      image: "https://picsum.photos/320",
+    },
+    {
+      id: 3,
+      descripcion: "A good description",
+      image: "https://picsum.photos/520",
+    },
   ];
 
   async function buscarDocumentOrCrearDocumento(idDocumento: string) {
@@ -51,12 +64,18 @@ export const Main = ({ email }: MainProps) => {
   }, []);
 
   return (
-    <main className="Main flex items-center justify-center">
-      <AddFileCard
-        arrayImages={arrayImages!}
+    <main className="Main grid w-full ">
+      <Header
+        arrayImages={arrayImages}
         setArrayImages={setArrayImages}
         email={email}
       />
+
+      {/* <AddFileCard
+        arrayImages={arrayImages!}
+        setArrayImages={setArrayImages}
+        email={email}
+      /> */}
       {arrayImages ? (
         <Gallery
           arrayImages={arrayImages}

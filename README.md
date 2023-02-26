@@ -34,9 +34,6 @@
 
 ## Overview
 
-![screenshot](./screenshot.png)
-![screenshot](./screenshot2.png)
-
 - I try use Formik first but it's much simple to use google for the log in
 - The Design Could improve but I'm not sure how to do that
 - It would help to work with a ui/ux developer

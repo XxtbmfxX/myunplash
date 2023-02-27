@@ -8,11 +8,12 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { FirebaseApp } from "../firebase/firebase.config";
 import { AppContextType } from "../@types/app";
 import { FileUploader } from "react-drag-drop-files";
+import { Button } from "flowbite-react";
 
 const fileTypes = ["JPG", "JPEG", "PNG", "GIF"];
 
 type AddFileCardProps = {
-  arrayImages: Object;
+  arrayImages: object | null;
   setArrayImages: Function;
   email: string;
 };
@@ -88,27 +89,34 @@ export const AddFileCard = ({
   });
 
   return (
-    <form className="FileCard_form" onSubmit={formik.handleSubmit}>
+    <form
+      className="FileCard_form dark:text-yellow-50 "
+      onSubmit={formik.handleSubmit}>
       <label htmlFor="description">Descripción</label>
       <input
         id="description"
         type="text"
-        className="text-gray-800"
+        className="text-gray-800 mb-4"
         {...formik.getFieldProps("description")}
       />
       {formik.touched.description && formik.errors.description ? (
         <div className="Login_error">{formik.errors.description}</div>
       ) : null}
       {/* file input */}
-      <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
+      <FileUploader
+        className="dark:text-yellow-50"
+        handleChange={handleChange}
+        name="file"
+        types={fileTypes}
+      />
 
       {/* //Submit button */}
-      <button
+      <Button
         onClick={() => setfileCard(!fileCard)}
-        className="bg-green-300 p-2 rounded-lg text-gray-800 hover:text-yellow-50 "
-        type="submit">
+        type="submit"
+        className="my-12">
         Subir Foto
-      </button>
+      </Button>
     </form>
   );
 };

@@ -5,7 +5,7 @@ import DragAndDrop from "./DragAndDrop";
 import { LoginForm } from "./LoginFrom";
 
 type ImageModal = {
-  arrayImages: Array<object | null>;
+  arrayImages: object | null;
   setArrayImages: Function;
   email: string;
 };
@@ -20,8 +20,14 @@ export default function ImageModal({
     <div>
       {" "}
       <Button onClick={() => setmodal(!modal)}>Add image</Button>
-      <Modal show={modal} onClose={() => setmodal(!modal)}>
-        <Modal.Header>Upload any image （。＾▽＾）</Modal.Header>
+      <Modal
+        className="h-screen pt-20 dark:text-yellow-50"
+        show={modal}
+        onClose={() => setmodal(!modal)}>
+        <Modal.Header>
+          Upload any image <br />
+          （。＾▽＾）
+        </Modal.Header>
         <Modal.Body>
           <AddFileCard
             arrayImages={arrayImages}
@@ -29,9 +35,6 @@ export default function ImageModal({
             email={email}
           />
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setmodal(false)}>aceptar</Button>
-        </Modal.Footer>
       </Modal>
     </div>
   );

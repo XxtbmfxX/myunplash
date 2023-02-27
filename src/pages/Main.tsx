@@ -64,7 +64,7 @@ export const Main = ({ email }: MainProps) => {
   }, []);
 
   return (
-    <main className="Main grid w-full ">
+    <main className="Main ">
       <Header
         arrayImages={arrayImages}
         setArrayImages={setArrayImages}

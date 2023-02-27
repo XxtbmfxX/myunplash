@@ -7,7 +7,7 @@ import { Burger } from "./Burger";
 import ImageModal from "./ImageModal";
 
 type Header = {
-  arrayImages: Array<object | null>;
+  arrayImages: object | null;
   setArrayImages: Function;
   email: string;
 };
@@ -16,7 +16,7 @@ const auth = getAuth(FirebaseApp);
 
 export const Header = ({ arrayImages, setArrayImages, email }: Header) => {
   return (
-    <header className="w-full mb-12 bg-gray-900 ">
+    <header className="w-full my-8 mb-12 bg-gray-900 ">
       {email ? (
         <Navbar fluid={true} rounded={true}>
           <Navbar.Brand>
